@@ -17,9 +17,17 @@ repositories {
     jcenter()
 }
 
+docker {
+	name "mycoolapp"
+	dockerfile file('src/docker/Dockerfile')
+	copySpec.from(jar).rename(".*","app.jar")
+	buildArgs(['JAR_FILE': "app.jar"])
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter:2.0.4.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-web:2.0.4.RELEASE'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE'
 
 }
+
